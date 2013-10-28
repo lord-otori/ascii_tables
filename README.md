@@ -17,7 +17,7 @@ import 'package:ascii_tables/ascii_tables.dart';
 
 List <Map <String, String>> list_map = [{'name':'Juan Sebastian','last name':'Simon'},{'name':'John','last name':'Doe','age': '27'}];
 
-new ascii_tables.fromList(list_map)
+new AsciiTables.fromList(list_map)
   ..displayHeader(true)
   ..printTable();  
 ```
