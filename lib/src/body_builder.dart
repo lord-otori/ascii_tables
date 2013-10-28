@@ -4,14 +4,14 @@ class BodyBuilder implements fromTypes {
   int _padding = 1;
   Map <String, int> _column_sizes;
   FormatString _fs = new FormatString();
-  
+
   void setPadding(int padding){
     this._padding = padding;
   }
   void setColumnSizes(Map <String, int> column_sizes) {
     this._column_sizes = column_sizes;
   }
-  
+
   String fromMap(Map <String, Map <String, String>> map){
     try {
     List table_rows = new List();
@@ -29,7 +29,7 @@ class BodyBuilder implements fromTypes {
       print(s);
     }
   }
-  
+
   String fromList(List <Map <String, String>> list) {
     return '';
   }

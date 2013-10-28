@@ -5,8 +5,8 @@ class HeaderBuilder implements fromTypes {
   int _padding = 1;
   Map <String, int> _column_sizes;
   FormatString _fs = new FormatString();
-  
-  
+
+
   void setPadding(int padding){
     this._padding = padding;
   }
@@ -21,7 +21,7 @@ class HeaderBuilder implements fromTypes {
       v.forEach((key,value){
       header.add(key);
     });});
-    
+
 
     header.forEach((String column_name) {
       header_row += '|';
@@ -32,7 +32,7 @@ class HeaderBuilder implements fromTypes {
     
     return header_row;
   }
-  
+
   String fromList(List <Map <String, String>> list) {
     return '';
   }
