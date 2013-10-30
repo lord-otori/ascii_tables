@@ -16,12 +16,16 @@ class BodyBuilder implements fromTypes {
     try {
     List table_rows = new List();
     map.forEach((k,v){
-      String row = '|';
+      StringBuffer row = new StringBuffer('!');
       this._column_sizes.forEach((String column_name, int column_size) {
-        String column_content = v.containsKey(column_name) ? v[column_name] : this._fs.str_repeat('-', column_size);
-        row += this._fs.str_pad(column_content, column_size + (this._padding * 2), ' ', PAD_BOTH) + '|';
+        if(v.containsKey(column_name)){
+          row.write(this._fs.str_pad(v[column_name], column_size + (this._padding * 2), ' ', PAD_BOTH));
+            }else{
+          row.write(this._fs.str_pad(this._fs.str_repeat('-', column_size), column_size + (this._padding * 2), ' ', PAD_BOTH));
+          }
+        row.write('!');
       });
-      table_rows.add(row);
+      table_rows.add(row.toString());
     });
     return table_rows.join('\n');
     } catch(e, s){
