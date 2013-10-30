@@ -29,17 +29,11 @@ class HeaderBuilder implements fromTypes {
     });
     header_row += '|';
     header_row += '\n+' + this._fs.str_repeat('-', (header_row.length - 2)) + '+';
-    
+
     return header_row;
   }
 
-  String fromList(List <Map <String, String>> list) {
-    return '';
-  }
-  String fromSet(Set set) {
-    return '';
-  }
-  String fromIterator(Iterator <String> i) {
-    return '';
-  }
+  String fromList(List <Map <String, String>> list) => throw new UnimplementedError();
+  String fromSet(Set set) => throw new UnimplementedError();
+  String fromIterator(Iterator <String> i) => throw new UnimplementedError();
 }

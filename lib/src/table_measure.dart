@@ -26,15 +26,9 @@ class TableMeasure implements fromTypes {
     return column_sizes;
   }
 
-  String fromList(List <Map <String, String>> list) {
-    return '';
-  }
-  String fromSet(Set set) {
-    return '';
-  }
-  String fromIterator(Iterator <String> i) {
-    return '';
-  }
+  String fromList(List <Map <String, String>> list) => throw new UnimplementedError();
+  String fromSet(Set set) => throw new UnimplementedError();
+  String fromIterator(Iterator <String> i) => throw new UnimplementedError();
 
   void setPadding(int padding){
     this._padding = padding;

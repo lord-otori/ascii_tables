@@ -31,12 +31,12 @@ class BodyBuilder implements fromTypes {
   }
 
   String fromList(List <Map <String, String>> list) {
-    return '';
+    throw new UnimplementedError();
   }
   String fromSet(Set set) {
-    return '';
+    throw new UnimplementedError();
   }
   String fromIterator(Iterator <String> i) {
-    return '';
+    throw new UnimplementedError();
   }
 }
