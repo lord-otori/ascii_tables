@@ -35,12 +35,12 @@ class AsciiTables{
     this._content_map = map;
     this._column_sizes = this._tm.fromMap(map);
   }
-  
+
   AsciiTables.fromList(List <Map <String, String>> list) {
     this._content_map = new Map.fromIterable(list);
     this._column_sizes = this._tm.fromMap(this._content_map);
   }
-  
+
   AsciiTables.fromSet(Set set) {
 
   }
@@ -48,25 +48,25 @@ class AsciiTables{
   AsciiTables.fromIterator(Iterator <String> i){
 
   }
-  
+
   void displayHeader(bool display_header) {
     this._isPrintHeaderEnabled = display_header;
   }
-  
+
   void setPadding(int padding){
     this._padding = padding;
   }
-  
+
   void printTable() {
     print(this._makeTable());
   }
-  
+
   String returnTable() {
     return this._makeTable();
   }
-  
+
   String _makeTable() {
-    String table = '';
+    StringBuffer table = new StringBuffer();
       this._hb.setPadding(this._padding);
       this._bb.setPadding(this._padding);
       this._hb.setColumnSizes(this._column_sizes);
@@ -76,18 +76,23 @@ class AsciiTables{
 
 
     FormatString fs = new FormatString();
-    
+
     int total_length = this._column_sizes.length * 2 * this._padding;
     this._column_sizes.forEach((k,v) {
       total_length += v;
     });
     total_length += (this._column_sizes.length -1);
-    table += '+' + fs.str_repeat('-', total_length) + '+\n';
+    table.write('+');
+    table.write(fs.str_repeat('-', total_length));
+    table.write('+\n');
     if(this._isPrintHeaderEnabled){
-      table += this._tableHeaderString + '\n';
+      table.write(this._tableHeaderString);
+      table.write('\n');
     }
-      table += this._tableBodyString + '\n';
-      table += '+' + fs.str_repeat('-', total_length) + '+';
-      return table;
+      table.write(this._tableBodyString);
+      table.write('\n+');
+      table.write(fs.str_repeat('-', total_length));
+      table.write('+');
+      return table.toString();
   }
 }

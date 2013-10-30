@@ -15,7 +15,7 @@ class HeaderBuilder implements fromTypes {
   }
 
   String fromMap(Map <String, Map <String, String>> map){
-    String header_row = '';
+    StringBuffer header_row = new StringBuffer();
     Set header = new Set();
     map.forEach((k,v) {
       v.forEach((key,value){
@@ -24,13 +24,14 @@ class HeaderBuilder implements fromTypes {
 
 
     header.forEach((String column_name) {
-      header_row += '|';
-      header_row += this._fs.str_pad(column_name, this._column_sizes[column_name] + (this._padding * 2), ' ', PAD_BOTH);
+      header_row.write('|');
+      header_row.write(this._fs.str_pad(column_name, this._column_sizes[column_name] + (this._padding * 2), ' ', PAD_BOTH));
     });
-    header_row += '|';
-    header_row += '\n+' + this._fs.str_repeat('-', (header_row.length - 2)) + '+';
-
-    return header_row;
+    header_row.write('|');
+    header_row.write('\n+');
+    header_row.write(this._fs.str_repeat('-', (header_row.length - 4)));
+    header_row.write('+');
+    return header_row.toString();
   }
 
   String fromList(List <Map <String, String>> list) => throw new UnimplementedError();
