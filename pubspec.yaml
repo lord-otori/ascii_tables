@@ -3,3 +3,6 @@ version: 1.0.1
 description: Creates ascii based tables from collections.
 author: Juan Simon <juan.simon@gmail.com>
 homepage: https://github.com/lord-otori/ascii_tables
+
+dependencies:
+  unittest: 0.8.5
