@@ -2,7 +2,6 @@ library ascii_tables;
 
 part 'src/format_string.dart';
 part 'src/exceptions.dart';
-part 'src/from_types.dart';
 part 'src/header_builder.dart';
 part 'src/body_builder.dart';
 part 'src/table_measure.dart';
@@ -27,8 +26,7 @@ class AsciiTables{
 
 
 
-  HeaderBuilder _hb = new HeaderBuilder();
-  BodyBuilder _bb = new BodyBuilder();
+
   TableMeasure _tm = new TableMeasure();
 
   AsciiTables.fromMap(Map <String, Map <String, String>> map){
@@ -42,11 +40,20 @@ class AsciiTables{
   }
 
   AsciiTables.fromSet(Set set) {
-
+    List tmplist = new List();
+    set.forEach((element) {
+      if(element is Map) {
+        tmplist.add(element);
+      } else {
+        tmplist.add({'item' : element});
+      }
+    });
+    this._content_map = new Map.fromIterable(tmplist);
+    this._column_sizes = this._tm.fromMap(this._content_map);
   }
 
   AsciiTables.fromIterator(Iterator <String> i){
-
+    throw new UnimplementedError();
   }
 
   void displayHeader(bool display_header) {
@@ -67,15 +74,12 @@ class AsciiTables{
 
   String _makeTable() {
     StringBuffer table = new StringBuffer();
-      this._hb.setPadding(this._padding);
-      this._bb.setPadding(this._padding);
-      this._hb.setColumnSizes(this._column_sizes);
-      this._bb.setColumnSizes(this._column_sizes);
-      this._tableHeaderString = this._hb.fromMap(this._content_map);
-      this._tableBodyString = this._bb.fromMap(this._content_map);
+      HeaderBuilder _hb = new HeaderBuilder(this._padding, this._column_sizes);
+      BodyBuilder _bb = new BodyBuilder(this._padding, this._column_sizes);
+      this._tableHeaderString = _hb.fromMap(this._content_map);
+      this._tableBodyString = _bb.fromMap(this._content_map);
 
 
-    FormatString fs = new FormatString();
 
     int total_length = this._column_sizes.length * 2 * this._padding;
     this._column_sizes.forEach((k,v) {
@@ -83,7 +87,7 @@ class AsciiTables{
     });
     total_length += (this._column_sizes.length -1);
     table.write('+');
-    table.write(fs.str_repeat('-', total_length));
+    table.write(str_repeat('-', total_length));
     table.write('+\n');
     if(this._isPrintHeaderEnabled){
       table.write(this._tableHeaderString);
@@ -91,7 +95,7 @@ class AsciiTables{
     }
       table.write(this._tableBodyString);
       table.write('\n+');
-      table.write(fs.str_repeat('-', total_length));
+      table.write(str_repeat('-', total_length));
       table.write('+');
       return table.toString();
   }
