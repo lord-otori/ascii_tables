@@ -1,9 +1,9 @@
 part of ascii_tables;
 
-class TableMeasure implements fromTypes {
+class TableMeasure {
 
-  int _padding = 1;
-  Map <String, int> _column_sizes;
+  int padding = 1;
+  Map <String, int> column_sizes;
 
   Map <String, int> fromMap(Map <String, Map <String, String>> map){
     Set header = new Set();
@@ -24,16 +24,5 @@ class TableMeasure implements fromTypes {
         });
     });
     return column_sizes;
-  }
-
-  String fromList(List <Map <String, String>> list) => throw new UnimplementedError();
-  String fromSet(Set set) => throw new UnimplementedError();
-  String fromIterator(Iterator <String> i) => throw new UnimplementedError();
-
-  void setPadding(int padding){
-    this._padding = padding;
-  }
-  void setColumnSizes(Map <String, int> column_sizes) {
-    this._column_sizes = column_sizes;
   }
 }
