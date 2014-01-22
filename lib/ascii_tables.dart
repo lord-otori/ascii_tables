@@ -15,6 +15,7 @@ class AsciiTables{
 
 
   bool _isPrintHeaderEnabled = true;
+  bool _isBorderDisabled = false;
   String _tableHeaderString;
   String _tableBodyString;
   int _padding = 1;
@@ -56,6 +57,10 @@ class AsciiTables{
     throw new UnimplementedError();
   }
 
+  void hideBorders(bool hide_borders) {
+    this._isBorderDisabled = hide_borders;
+  }
+
   void displayHeader(bool display_header) {
     this._isPrintHeaderEnabled = display_header;
   }
@@ -75,7 +80,8 @@ class AsciiTables{
   String _makeTable() {
     StringBuffer table = new StringBuffer();
       HeaderBuilder _hb = new HeaderBuilder(this._padding, this._column_sizes);
-      BodyBuilder _bb = new BodyBuilder(this._padding, this._column_sizes);
+      BodyBuilder _bb = new BodyBuilder(this._padding, this._column_sizes,
+          this._isBorderDisabled);
       this._tableHeaderString = _hb.fromMap(this._content_map);
       this._tableBodyString = _bb.fromMap(this._content_map);
 
@@ -86,17 +92,21 @@ class AsciiTables{
       total_length += v;
     });
     total_length += (this._column_sizes.length -1);
-    table.write('+');
+    if(!this._isBorderDisabled) {
+      table.write('+');
     table.write(str_repeat('-', total_length));
     table.write('+\n');
+    }
     if(this._isPrintHeaderEnabled){
       table.write(this._tableHeaderString);
       table.write('\n');
     }
       table.write(this._tableBodyString);
-      table.write('\n+');
-      table.write(str_repeat('-', total_length));
-      table.write('+');
+      if(!this._isBorderDisabled) {
+        table.write('\n+');
+        table.write(str_repeat('-', total_length));
+        table.write('+');
+      }
       return table.toString();
   }
 }

@@ -19,8 +19,10 @@ main() {
   mapSet.add({'map item': 'Third Item'});
 
   new AsciiTables.fromMap(map)
-    ..displayHeader(true)
+    ..displayHeader(false)
+    ..hideBorders(true)
     ..printTable();
+    print("\n");
 
   AsciiTables at = new AsciiTables.fromMap(map)
     ..displayHeader(true);
