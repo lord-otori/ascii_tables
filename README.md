@@ -1,4 +1,4 @@
-ascii_tables
+ascii_tables [![Build Status](https://drone.io/github.com/lord-otori/ascii_tables/status.png)](https://drone.io/github.com/lord-otori/ascii_tables/latest)
 ============
 
 Creates ascii based tables from collections.
